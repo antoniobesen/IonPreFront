@@ -1,9 +1,6 @@
 <template>
   <v-container>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-    >
+    <v-navigation-drawer v-model="drawer" app>
       <v-list dense>
         <v-list-item link>
           <v-list-item-action>
@@ -24,26 +21,22 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar
-      app
-      color="indigo"
-      dark
-    >
+    <v-app-bar app color="indigo" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>Empresa do tuca</v-toolbar-title>
+      <v-toolbar-title>IonPrev</v-toolbar-title>
     </v-app-bar>
   </v-container>
 </template>
 
 <script>
-  export default {
-    props: {
-      source: String,
-    },
-    data() {
-      return {
-        drawer: false
-      }
-    }
+export default {
+  props: {
+    source: String
+  },
+  data() {
+    return {
+      drawer: false
+    };
   }
+};
 </script>

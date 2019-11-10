@@ -1,3 +1,4 @@
+
 <template>
   <v-container class="grey lighten-10">
     <v-row>
@@ -14,18 +15,18 @@
       </v-col>
       <v-col xs="12" sm="8" lg="6" class="white">
         <mostActiveUser></mostActiveUser>
+        {{teste}}
       </v-col>
     </v-row>
-
-
   </v-container>
 </template>
 
 <script>
-import companyActions from '../components/companyActions.vue'
-import mostUsedPart from '../components/mostUsedPart.vue'
-import mostActiveUser from '../components/mostActiveUser.vue'
-import latestCompanyActions from '../components/latestCompanyActions.vue'
+/* eslint-disable no-debugger */
+import companyActions from "../components/companyActions.vue";
+import mostUsedPart from "../components/mostUsedPart.vue";
+import mostActiveUser from "../components/mostActiveUser.vue";
+import latestCompanyActions from "../components/latestCompanyActions.vue";
 
 export default {
   components: {
@@ -33,11 +34,23 @@ export default {
     mostUsedPart,
     mostActiveUser,
     latestCompanyActions
-},
-  data(){
+  },
+  data() {
     return {
-
-    }
+      teste: []
+    };
+  },
+  created() {
+    this.$http.get("http://localhost:3000/api/events").then(data => {
+      // this.teste = data.body.data;
+      return data;
+    });
+    // this.$http.get("localhost:3000/api/users").then(data => {
+    //   this.$store.state.users = data.body.data;
+    // });
+    // this.$http.get("localhost:3000/api/companies").then(data => {
+    //   this.$store.state.companies = data.body.data;
+    // });
   }
-}
+};
 </script>

@@ -8,120 +8,120 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     csvData: [
-      // {
-      //   userId: 1,
-      //   companyId: 1,
-      //   name: "login",
-      //   action: "put",
-      //   dateTime: new Date()
-      // },
-      // {
-      //   userId: 2,
-      //   companyId: 2,
-      //   name: "dashboard",
-      //   action: "get",
-      //   dateTime: new Date("2019-11-05 11:05:50")
-      // },
-      // {
-      //   userId: 3,
-      //   companyId: 3,
-      //   name: "budget",
-      //   action: "get",
-      //   dateTime: new Date("2019-10-30 11:07:50")
-      // },
-      // {
-      //   userId: 4,
-      //   companyId: 3,
-      //   name: "dashboard",
-      //   action: "get",
-      //   dateTime: new Date("2019-04-01 11:07:50")
-      // },
-      // {
-      //   userId: 4,
-      //   companyId: 3,
-      //   name: "login",
-      //   action: "get",
-      //   dateTime: new Date("2019-04-01 11:07:50")
-      // },
-      // {
-      //   userId: 5,
-      //   companyId: 3,
-      //   name: "dashboard",
-      //   action: "get",
-      //   dateTime: new Date("2019-10-18 11:07:50")
-      // },
-      // {
-      //   userId: 10,
-      //   companyId: 1,
-      //   name: "budget",
-      //   action: "get",
-      //   dateTime: new Date("2019-04-01 11:07:50")
-      // }
+      {
+        user_id: 1,
+        id: 1,
+        name: "login",
+        action: "put",
+        due_at: new Date()
+      },
+      {
+        user_id: 2,
+        id: 2,
+        name: "dashboard",
+        action: "get",
+        due_at: new Date("2019-11-05 11:05:50")
+      },
+      {
+        user_id: 3,
+        id: 3,
+        name: "budget",
+        action: "get",
+        due_at: new Date("2019-10-30 11:07:50")
+      },
+      {
+        user_id: 4,
+        id: 3,
+        name: "dashboard",
+        action: "get",
+        due_at: new Date("2019-04-01 11:07:50")
+      },
+      {
+        user_id: 4,
+        id: 3,
+        name: "login",
+        action: "get",
+        due_at: new Date("2019-04-01 11:07:50")
+      },
+      {
+        user_id: 5,
+        id: 3,
+        name: "dashboard",
+        action: "get",
+        due_at: new Date("2019-10-18 11:07:50")
+      },
+      {
+        user_id: 10,
+        id: 1,
+        name: "budget",
+        action: "get",
+        due_at: new Date("2019-04-01 11:07:50")
+      }
     ],
     users: [
-      // {
-      //   userId: 1,
-      //   email: "user1@user.com",
-      //   companyId: 1
-      // },
-      // {
-      //   userId: 2,
-      //   email: "user2@user.com",
-      //   companyId: 2
-      // },
-      // {
-      //   userId: 3,
-      //   email: "user3@user.com",
-      //   companyId: 3
-      // },
-      // {
-      //   userId: 4,
-      //   email: "user4@user.com",
-      //   companyId: 3
-      // },
-      // {
-      //   userId: 5,
-      //   email: "user5@user.com",
-      //   companyId: 3
-      // },
-      // {
-      //   userId: 10,
-      //   email: "user10@user.com",
-      //   companyId: 1
-      // }
+      {
+        user_id: 1,
+        email: "user1@user.com",
+        id: 1
+      },
+      {
+        user_id: 2,
+        email: "user2@user.com",
+        id: 2
+      },
+      {
+        user_id: 3,
+        email: "user3@user.com",
+        id: 3
+      },
+      {
+        user_id: 4,
+        email: "user4@user.com",
+        id: 3
+      },
+      {
+        user_id: 5,
+        email: "user5@user.com",
+        id: 3
+      },
+      {
+        user_id: 10,
+        email: "user10@user.com",
+        id: 1
+      }
     ],
     companies: [
-      // {
-      //   name: "Empresa 1",
-      //   companyId: 1
-      // },
-      // {
-      //   name: "Empresa 2",
-      //   companyId: 2
-      // },
-      // {
-      //   name: "Empresa 3",
-      //   companyId: 3
-      // },
-      // {
-      //   name: "Empresa 4",
-      //   companyId: 4
-      // },
-      // {
-      //   name: "Empresa 5",
-      //   companyId: 5
-      // },
-      // {
-      //   name: "Empresa 6",
-      //   companyId: 6
-      // }
+      {
+        name: "Empresa 1",
+        id: 1
+      },
+      {
+        name: "Empresa 2",
+        id: 2
+      },
+      {
+        name: "Empresa 3",
+        id: 3
+      },
+      {
+        name: "Empresa 4",
+        id: 4
+      },
+      {
+        name: "Empresa 5",
+        id: 5
+      },
+      {
+        name: "Empresa 6",
+        id: 6
+      }
     ]
   },
   getters: {
     getCompanyEventsById(state) {
       return id =>
         state.csvData.filter(csv => {
-          return id == csv.companyId;
+          return id == csv.id;
         });
     },
     getMostUsedFuncionality(state) {
@@ -136,33 +136,33 @@ export default new Vuex.Store({
     },
     getLatestCompanyEventsById(state, getters) {
       var date = new Date().setTime(new Date().getTime() - 20 * 86400000);
-      return companyId =>
-        getters.getCompanyEventsById(companyId).filter(event => {
-          return event.dateTime > date;
+      return id =>
+        getters.getCompanyEventsById(id).filter(event => {
+          return event.due_at > date;
         });
     },
 
     getUserById(state) {
       return id =>
         state.users.find(user => {
-          return user.userId == id;
+          return user.user_id == id;
         });
     },
     getCompanyById(state) {
       return id =>
         state.companies.find(company => {
-          return company.companyId == id;
+          return company.id == id;
         });
     },
     getMostActiveUser(state, getters) {
-      var groupedUsers = groupBy(state.csvData, "userId");
+      var groupedUsers = groupBy(state.csvData, "user_id");
 
-      var userId = maxBy(Object.keys(groupedUsers), id => {
+      var user_id = maxBy(Object.keys(groupedUsers), id => {
         return groupedUsers[id].length;
       });
 
-      var user = getters.getUserById(userId);
-      var userCompany = getters.getCompanyById(user.companyId);
+      var user = getters.getUserById(user_id);
+      var userCompany = getters.getCompanyById(user.id);
       user = {
         userEmail: user.email,
         companyName: userCompany.name

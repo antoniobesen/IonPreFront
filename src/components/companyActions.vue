@@ -11,7 +11,7 @@
           label="Empresas"
           :items="companies"
           item-text="name"
-          item-value="companyId"
+          item-value="id"
           v-model="selectedCompany"
         ></v-select>
       </v-col>
@@ -24,7 +24,7 @@
         <v-list v-show="searchCompanyActions">
           <v-list-item v-for="(event, index) in getCompanyEventsById(selectedCompany)" :key="index">
             <v-list-item-content>
-              <v-list-item-title v-text="event.eventName"></v-list-item-title>
+              <v-list-item-title v-text="event.name"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
