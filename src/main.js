@@ -1,9 +1,10 @@
 import Vue from "vue";
-import App from "./App.vue";
+import VueResource from "vue-resource";
+import vuetify from "./plugins/vuetify";
+import "./plugins/axios";
 import router from "./router";
 import store from "./store";
-import vuetify from "./plugins/vuetify";
-import VueResource from "vue-resource";
+import App from "./App.vue";
 
 Vue.use(VueResource);
 

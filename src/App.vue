@@ -9,6 +9,7 @@
 </template>
 
 <script>
+/* eslint-disable no-debugger */
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 
