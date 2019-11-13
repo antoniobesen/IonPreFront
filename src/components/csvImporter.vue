@@ -18,8 +18,7 @@ export default {
   },
   methods: {
     handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-      debugger;
+      this.file = this.$refs.file;
     },
     async submitFile() {
       let formData = new FormData();

@@ -1,5 +1,5 @@
 import Vue from "vue";
 
 export default {
-  index: () => Vue.axios.get("api/companies")
+  index: () => Vue.axios.get("companies")
 };
