@@ -1,6 +1,13 @@
 <template>
   <v-container>
-    <csv-importer></csv-importer>
+    <v-row>
+      <v-col>
+        <v-file-input label="CSV file" ref="fileComponent" @change="handleFileUpload" :key="key"></v-file-input>
+      </v-col>
+      <v-col>
+        <v-btn @click="submitFile">Submit</v-btn>
+      </v-col>
+    </v-row>
     <v-row v-if="isLoading">
       <h1>Carregando</h1>
     </v-row>
@@ -33,11 +40,11 @@
 
 <script>
 /* eslint-disable no-debugger */
+import FilesService from "@/services/FilesService.js";
 import companyActions from "../components/companyActions.vue";
 import mostUsedPart from "../components/mostUsedPart.vue";
 import mostActiveUser from "../components/mostActiveUser.vue";
 import latestCompanyActions from "../components/latestCompanyActions.vue";
-import csvImporter from "@/components/csvImporter.vue";
 import CompaniesService from "@/services/CompaniesService.js";
 import EventsService from "@/services/EventsService.js";
 import UsersService from "@/services/UsersService.js";
@@ -48,8 +55,7 @@ export default {
     companyActions,
     mostUsedPart,
     mostActiveUser,
-    latestCompanyActions,
-    csvImporter
+    latestCompanyActions
   },
   data() {
     return {
@@ -57,7 +63,9 @@ export default {
         companies: true,
         users: true,
         events: true
-      }
+      },
+      file: "",
+      key: Date.now()
     };
   },
   mounted() {
@@ -103,6 +111,20 @@ export default {
         window.alert(error);
       }
       this.loading.events = false;
+    },
+    handleFileUpload() {
+      this.file = this.$refs.fileComponent.$refs.input.files[0];
+    },
+    async submitFile() {
+      let formData = new FormData();
+      try {
+        formData.append("file", this.file);
+        await FilesService.postCsv(formData);
+      } catch (error) {
+        window.alert(error);
+      }
+      this.loadEvents();
+      this.key = Date.now();
     },
     ...mapMutations(["setCompanies", "setUsers", "setEvents"])
   }

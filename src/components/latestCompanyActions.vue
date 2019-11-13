@@ -22,7 +22,10 @@
     <v-row>
       <v-col lg="12">
         <v-list v-show="searchCompanyActions">
-          <v-list-item v-for="event in getLatestCompanyEventsById(selectedCompany)" :key="event">
+          <v-list-item
+            v-for="(event,index) in getLatestCompanyEventsById(selectedCompany)"
+            :key="index"
+          >
             <v-list-item-content>
               <v-list-item-title v-text="event.name"></v-list-item-title>
             </v-list-item-content>
