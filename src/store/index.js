@@ -69,6 +69,10 @@ export default new Vuex.Store({
         companyName: userCompany.name
       };
       return user;
+    },
+    isEventsEmpty(state) {
+      if (state.csvData.length === 0) return true;
+      return false;
     }
   },
   mutations: {

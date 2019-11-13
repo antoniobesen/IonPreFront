@@ -1,4 +1,3 @@
-
 <template>
   <v-container>
     <csv-importer></csv-importer>
@@ -6,22 +5,28 @@
       <h1>Carregando</h1>
     </v-row>
     <template v-else>
-      <v-row>
-        <v-col xs="12" sm="8" lg="6" class="white" cols="12">
-          <company-actions></company-actions>
-        </v-col>
-        <v-col xs="12" sm="8" lg="6" class="white">
-          <most-used-part></most-used-part>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col xs="12" sm="8" lg="6" class="white" cols="12">
-          <latest-company-actions></latest-company-actions>
-        </v-col>
-        <v-col xs="12" sm="8" lg="6" class="white">
-          <most-active-user></most-active-user>
-        </v-col>
-      </v-row>
+      <v-template v-if="!isEventsEmpty">
+        <v-row>
+          <v-col xs="12" sm="8" lg="6" class="white" cols="12">
+            <company-actions></company-actions>
+          </v-col>
+          <v-col xs="12" sm="8" lg="6" class="white">
+            <most-used-part></most-used-part>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col xs="12" sm="8" lg="6" class="white" cols="12">
+            <latest-company-actions></latest-company-actions>
+          </v-col>
+          <v-col xs="12" sm="8" lg="6" class="white">
+            <most-active-user></most-active-user>
+          </v-col>
+        </v-row>
+      </v-template>
+      <template v-else>
+        <h1>Sem eventos cadastrados</h1>
+        <h4>Importe arquivo csv</h4>
+      </template>
     </template>
   </v-container>
 </template>
@@ -36,7 +41,7 @@ import csvImporter from "@/components/csvImporter.vue";
 import CompaniesService from "@/services/CompaniesService.js";
 import EventsService from "@/services/EventsService.js";
 import UsersService from "@/services/UsersService.js";
-import { mapMutations } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -65,7 +70,8 @@ export default {
       return (
         this.loading.companies || this.loading.users || this.loading.events
       );
-    }
+    },
+    ...mapGetters(["isEventsEmpty"])
   },
   methods: {
     async loadCompanies() {
