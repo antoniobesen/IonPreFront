@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col>
-      <v-file-input label="CSV file" ref="file" @change="handleFileUpload"></v-file-input>
+      <v-file-input label="CSV file" ref="fileComponent" @change="handleFileUpload"></v-file-input>
     </v-col>
     <v-col>
       <v-btn @click="submitFile">Submit</v-btn>
@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     handleFileUpload() {
-      this.file = this.$refs.file;
+      this.file = this.$refs.fileComponent.$refs.input.files[0];
     },
     async submitFile() {
       let formData = new FormData();
