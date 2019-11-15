@@ -1,26 +1,7 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col lg="6" justify="space-around">
-        <h4>Visualizar ações por empresa</h4>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col lg="6">
-        <v-select
-          label="Empresas"
-          :items="companies"
-          item-text="name"
-          item-value="id"
-          v-model="selectedCompany"
-        ></v-select>
-      </v-col>
-      <v-col>
-        <v-btn @click="searchCompanyActions = !searchCompanyActions">Pesquisar</v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col lg="12">
+    <company-actions-card title="Pesquisar últimas ações por empresa">
+      <template v-slot:body="{ selectedCompany }">
         <v-list v-show="searchCompanyActions">
           <v-list-item
             v-for="(event,index) in getLatestCompanyEventsById(selectedCompany)"
@@ -31,25 +12,28 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-      </v-col>
-    </v-row>
+      </template>
+    </company-actions-card>
   </v-container>
 </template>
 
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
+import CompanyActionsCard from "@/components/CompanyActionsCard.vue";
 
 export default {
+  components: {
+    CompanyActionsCard
+  },
   data() {
     return {
-      selectedCompany: 0,
-      searchCompanyActions: false
+      selectedCompany: undefined,
+      searchCompanyActions: true
     };
   },
   computed: {
-    ...mapState(["companies"]),
-    ...mapGetters(["getCompanyEventsById", "getLatestCompanyEventsById"])
+    ...mapGetters(["getLatestCompanyEventsById"])
   }
 };
 </script>
